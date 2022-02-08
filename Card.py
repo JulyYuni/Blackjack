@@ -20,7 +20,7 @@ class Card:
     # Construtor
     def __init__(self, value, suit):
         self.__value = value
-        self.__suit = suitaaaa
+        self.__suit = suit
 
         # Verificando o argumento 'value'
         if type(self.__value) == int:
