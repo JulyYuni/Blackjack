@@ -3,19 +3,21 @@ class Card:
 
     # Membros estáticos (coletivos) da classe
     # Todos os objetos podem acessá-los
-    __names = {1 : "ace",
-               2 : "two",
-               3 : "three",
-               4 : "four",
-               5 : "five",
-               6 : "six",
-               7 : "seven",
-               8 : "eight",
-               9 : "nine",
-               10 : "ten",
-               11 : "queen",
-               12 : "jack",
-               13 : "king"}
+    __names = {1 : "Ace",
+               2 : "Two",
+               3 : "Three",
+               4 : "Four",
+               5 : "Five",
+               6 : "Six",
+               7 : "Seven",
+               8 : "Eight",
+               9 : "Nine",
+               10 : "Ten",
+               11 : "Queen",
+               12 : "Jack",
+               13 : "King"}
+    
+    __suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 
     # Construtor
     def __init__(self, value, suit):
@@ -29,6 +31,10 @@ class Card:
         else:
                 raise TypeError("'value' need to be an integer not {}".format(type(self.__value)))
 
+        # Verificando o argumento 'suit'
+        if suit not in self.__suits:
+            raise ValueError("'suit' need to be one of this strings: Hearts, Diamonds, Clubs or Spades")
+
     def __str__(self):
         return "{} of {}".format(self.__names.get(self.__value), self.__suit)
 
@@ -40,4 +46,3 @@ class Card:
 
     def name(self):
         return self.__str__().capitalize()
-
