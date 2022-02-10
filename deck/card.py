@@ -20,29 +20,26 @@ class Card:
     __suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 
     # Construtor
-    def __init__(self, value, suit):
-        self.__value = value
-        self.__suit = suit
-
-        # Verificando o argumento 'value'
-        if type(self.__value) == int:
-            if self.__value < 1 or self.__value > 13: 
-                raise ValueError("'value' need to be an integer between 1 and 13")
-        else:
-                raise TypeError("'value' need to be an integer not {}".format(type(self.__value)))
-
-        # Verificando o argumento 'suit'
-        if suit not in self.__suits:
-            raise ValueError("'suit' need to be one of this strings: Hearts, Diamonds, Clubs or Spades")
+    def __init__(self, atribute):
+        self.__atribute = atribute
 
     def __str__(self):
-        return "{} of {}".format(self.__names.get(self.__value), self.__suit)
+        text = ""
+        for atrr in self.__atribute:
+            text = text + "{}: {}\n".format(atrr, self.__atribute[atrr])
+        return text
 
-    def value(self):
-        return self.__value
+    def atribute(self, atribute):
+        return self.__atribute[atribute]
 
-    def suit(self):
-        return self.__suit
+if __name__ == "__main__":
+    #atributes_ace_of_hearts = {"value" : 1,
+    #                           "suit"  : "Hearts"} 
+    #c1 = Card(atributes_ace_of_hearts)
 
-    def name(self):
-        return self.__str__().capitalize()
+    c1 = Card({"value" : 1, "suit"  : "Hearts"})
+    print(c1)
+
+    c1 = Card("banana")
+    print(c1)
+    
