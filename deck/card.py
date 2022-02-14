@@ -19,8 +19,11 @@ class Card:
     
     __suits = ["Hearts", "Diamonds", "Clubs", "Spades"]
 
-    # Construtor
+    # Constructor
     def __init__(self, atribute):
+        # Checking if atribute is a dict
+        if type(atribute) != dict:
+            raise TypeError("'atribute' need to be a dict.")
         self.__atribute = atribute
 
     def __str__(self):
@@ -37,9 +40,9 @@ if __name__ == "__main__":
     #                           "suit"  : "Hearts"} 
     #c1 = Card(atributes_ace_of_hearts)
 
-    c1 = Card({"value" : 1, "suit"  : "Hearts"})
-    print(c1)
-
-    c1 = Card("banana")
+    atributes_in_c1 = {"value": 1,
+                       "suit": "Hearts"}
+    c1 = Card(atributes_in_c1)
+    c1.__atribute = {"value": 1000, "suit": "pirocas"}
     print(c1)
     
