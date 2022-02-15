@@ -1,6 +1,6 @@
 from abstract_card import AbstractCard
 
-# TODO: Comenta a classe
+# Class to represent a card from a common deck
 class Card(AbstractCard):
 
     # Defining names of the values of the cards
@@ -63,27 +63,18 @@ class Card(AbstractCard):
     def __str__(self):
         return "{} of {}".format(self.__NAMES.get(self.__attributes.get(self.__VALUE_ATTR)), self.__attributes.get(self.__SUIT_ATTR))
 
-    # Return the value of the attribute
+    # Return the value from a given attribute
     def value_of(self, attribute):
         return self.__attributes.get(attribute)
 
-    # Return the keys of this class
+    # Return the card's keys (attributes)
     def keys(self):
         return self.__attributes.keys()
 
-    # TODO: Adiciona um método pra obter a cor da carta
+    # Return the card color
+    def color(self):
+        return self.__attributes.get(self.__COLOR_ATTR)
 
 
-if __name__ == "__main__":
-    
-    attributes_in_c1 = {"Value": 1,
-                        "Suit": "Hearts",
-                        "Color": "Blue"}
-    c1 = Card(attributes_in_c1)
-    print(c1)
-    print(c1.value_of("Value"))
-    print(c1.value_of("Suit"))
-    print(c1.value_of("Color"))
 
-    print(c1.keys())
     
