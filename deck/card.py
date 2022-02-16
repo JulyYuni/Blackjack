@@ -39,9 +39,17 @@ class Card(AbstractCard):
         self.__attributes = attributes
 
         # Checking if attributes are "Value", "Suit" and "Color Side"
-        for attribute in [self.__VALUE_ATTR, self.__SUIT_ATTR, self.__COLOR_ATTR]:
+        for attribute in self.keys():
             if self.__attributes.get(attribute) is None:
                 raise ValueError("The card doesn't have attribute {}".format(attribute))
+
+        # Removing other keys that should be passed in dict
+        attributes_to_be_removed = []
+        for attribute in self.__attributes:
+            if not attribute in self.keys():
+                attributes_to_be_removed.append(attribute)
+        for attribute in attributes_to_be_removed:
+            self.__attributes.pop(attribute, None)
 
         # Checking the argument 'value'
         value = self.__attributes.get(self.__VALUE_ATTR)
@@ -74,8 +82,4 @@ class Card(AbstractCard):
 
     # Return the Card's keys (attributes)
     def keys(self):
-        return self.__attributes.keys()
-
-    # Return the Card color
-    def color(self):
-        return self.__attributes.get(self.__COLOR_ATTR)
+        return [self.__VALUE_ATTR, self.__SUIT_ATTR, self.__COLOR_ATTR]
