@@ -42,13 +42,13 @@ class Deck:
 
     # To add a Card in Deck
     def receive(self, card):
-        self.__cards.append(card)
+        return self.__cards.append(card)
 
     # To discard all Cards in the Deck
     def discard (self):
-        discard_list = []
-        discard_list.extend(self.__cards)
-        self.__cards.clear()
+        discard_list = Deck()
+        while len(self.__cards) > 0:
+            discard_list.receive(self.__cards.pop())
         return discard_list
 
     # To shuffle Deck
@@ -70,6 +70,10 @@ class Deck:
 
     # Required to serialize Deck inside list in dict objects
     __repr__ = __str__
+
+    # Return all cards in a list
+    def deck_list(self):
+        return self.__cards
 
 
 if __name__ == "__main__":

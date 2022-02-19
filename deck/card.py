@@ -80,6 +80,24 @@ class Card(AbstractCard):
     def value_of(self, attribute):
         return self.__attributes.get(attribute)
 
+    def true_cards_value(self):
+        true_cards_value = {1 : 1,
+                            2 : 2,
+                            3 : 3,
+                            4 : 4,
+                            5 : 5,
+                            6 : 6,
+                            7 : 7,
+                            8 : 8,
+                            9 : 9,
+                            10 : 10,
+                            11 : 10,
+                            12 : 10,
+                            13 : 10}
+
+        true_value = true_cards_value.get(self.__attributes.get(self.__VALUE_ATTR))
+        return true_value
+
     # Return the Card's keys (attributes)
     def keys(self):
         return [self.__VALUE_ATTR, self.__SUIT_ATTR, self.__COLOR_ATTR]
