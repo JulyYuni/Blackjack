@@ -46,11 +46,11 @@ class Deck:
 
     # To discard all Cards in the Deck
     def discard (self):
-        discard_list = Deck()
+        discard_deck = Deck()
         while len(self.__cards) > 0:
-            discard_list.receive(self.__cards.pop())
-        return discard_list
-
+            discard_deck.receive(self.__cards.pop())
+        return discard_deck
+    
     # To shuffle Deck
     def shuffle(self):
         for i in range(0, 4):
@@ -64,6 +64,12 @@ class Deck:
     def lenght(self):
         return len(self.__cards)
 
+    """# Somating decks
+    def somating_decks(self, second_deck): 
+        self.__cards = self.__cards.extend()
+        second_deck_self__cards = second_deck.deck_list()
+        return self.__cards"""
+
     # Return the Deck in words
     def __str__(self):
         return "   |".join([str(card) for card in self.__cards])
@@ -74,25 +80,3 @@ class Deck:
     # Return all cards in a list
     def deck_list(self):
         return self.__cards
-
-
-if __name__ == "__main__":
-    player_hand = Deck(0)
-    dealer_hand = Deck(0)
-    my_deck = Deck(8)
-    deck_with_52_cards = Deck(1)
-    
-    for i in range (0, 2):
-        taken_card = my_deck.hit()
-        player_hand.receive(taken_card)
-
-        dealer_hand.receive(my_deck.hit())
-
-    print("Player hand: {}".format(player_hand))
-    print("Dealer hand: {}".format(dealer_hand))
-
-    cards_discarded = player_hand.discard()
-    cards_discarded.extend(dealer_hand.discard())
-
-    print("Discard pile: {}".format(cards_discarded))
-    print(player_hand) # Should print an empty string

@@ -69,17 +69,7 @@ class Card(AbstractCard):
         if not color in self.__COLORS:
             raise ValueError("color need to be one of this strings: Blue or Red")
 
-    # Return the Card in words
-    def __str__(self):
-        return "{} of {} of {}".format(self.__NAMES.get(self.__attributes.get(self.__VALUE_ATTR)), self.__attributes.get(self.__SUIT_ATTR), self.__attributes.get(self.__COLOR_ATTR))
-
-    # Required to serialize Card inside list in dict objects
-    __repr__ = __str__
-
-    # Return the value from a given attribute
-    def value_of(self, attribute):
-        return self.__attributes.get(attribute)
-
+    # Return the BlackJack value of each card
     def true_cards_value(self):
         true_cards_value = {1 : 1,
                             2 : 2,
@@ -98,6 +88,17 @@ class Card(AbstractCard):
         true_value = true_cards_value.get(self.__attributes.get(self.__VALUE_ATTR))
         return true_value
 
+    # Return the value from a given attribute
+    def value_of(self, attribute):
+        return self.__attributes.get(attribute)
+
     # Return the Card's keys (attributes)
     def keys(self):
         return [self.__VALUE_ATTR, self.__SUIT_ATTR, self.__COLOR_ATTR]
+
+    # Return the Card in words
+    def __str__(self):
+        return "{} of {} of {}".format(self.__NAMES.get(self.__attributes.get(self.__VALUE_ATTR)), self.__attributes.get(self.__SUIT_ATTR), self.__attributes.get(self.__COLOR_ATTR))
+
+    # Required to serialize Card inside list in dict objects
+    __repr__ = __str__

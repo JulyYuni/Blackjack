@@ -5,24 +5,60 @@ from deck import Deck
 class Player:
     
     # Constructor
-
     def __init__(self, name, money, bet):
         self.__name = name
         self.__hand = Deck()
         self.__bet = bet
         self.__money = money
-        self.__discard_list = Deck()
+        self.__discard_deck = Deck()
 
-    def hit1(self, my_deck):
+    # Hitting a card from my_deck to self.__hand deck
+    def player_hit(self, my_deck):
         return self.__hand.receive(my_deck.hit())
 
-    def discard1(self):
-        cards_discarded = self.__hand.discard()
-        return self.__discard_list.receive(cards_discarded)
+    # Discarding the player hand on the discard list
+    def player_discard(self, discard_pile):
+        discard_deck = self.__hand.discard()
+        discard_pile.receive(discard_deck)
+        return discard_pile, self.__hand
 
-    def card_calculator(player1, dealer):
-        pass
+    # To calculate the total player hand value
+    def card_calculator(self, player):
+        hand_value = 0
 
+        for card in player.hand().deck_list():
+            hand_value += card.true_cards_value()
+
+        return hand_value
+
+    # Dealer calculate how much cards it need to hit
+    def dealer_calculator(self, dealer, my_deck):
+        dealer_value = dealer.card_calculator(dealer)
+        while dealer_value < 17:
+            dealer.player_hit(my_deck)
+            print(dealer)
+            dealer_value = dealer.card_calculator(dealer)
+        return dealer_value
+
+    # Do the things when the player loses
+    def lose(self):
+        self.__money = self.__money - self.__bet
+        self.__conclusion = print("\nYou Lose!\n\n")
+        print("<" + ("-" * 150) + ">")
+        return self.__money, self.__conclusion
+
+     # Do the things when the player wins
+    def win(self):
+        self.__money = self.__money + self.__bet
+        self.__conclusion = print("\nYou Win!\n\n")
+        print("<" + ("-" * 150) + ">")
+        return self.__money, self.__conclusion
+
+    # Player can double it own bet
+    def double(self, player):
+        return self.__bet *2 
+
+    # Returning all the variables
     def money(self):
         return self.__money
 
@@ -34,16 +70,13 @@ class Player:
 
     def hand(self):
         return self.__hand
-        
+
+    def discard_deck(self):
+        return self.__discard_deck
+ 
+    # Return the player_hand in words
     def __str__(self):
-        return "{}: {}".format(self.__name, self.__hand)
+        return "\n\n{}: {}".format(self.__name, self.__hand)
 
+    # Required to serialize Deck inside list in dict objects
     __repr__ = __str__
-
-    
-
-
-
-if __name__ == "__main__":
-    ju = Player("Júlia", 1000)
-    will = Player("Willian", 500)
