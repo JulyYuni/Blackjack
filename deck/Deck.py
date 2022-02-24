@@ -56,19 +56,26 @@ class Deck:
         for i in range(0, 4):
             shuffle(self.__cards)
 
+    # Somating decks
+    def somating_decks(self, my_deck): 
+        while len(self.__cards) > 0:
+            my_deck.receive(self.__cards.pop())
+        return my_deck
+
     # To sort Deck  
     def sort(self):
         self.__cards.sort()
 
     # Return the lenght of the Deck
-    def lenght(self):
+    def lenght(self, lenght = None):
+        if lenght == None:
+            lenght = len(self.__cards)
+        self.__cards = self.__cards[0:lenght]
         return len(self.__cards)
 
-    """# Somating decks
-    def somating_decks(self, second_deck): 
-        self.__cards = self.__cards.extend()
-        second_deck_self__cards = second_deck.deck_list()
-        return self.__cards"""
+    # Return all cards in a list
+    def deck_list(self):
+        return self.__cards
 
     # Return the Deck in words
     def __str__(self):
@@ -76,7 +83,3 @@ class Deck:
 
     # Required to serialize Deck inside list in dict objects
     __repr__ = __str__
-
-    # Return all cards in a list
-    def deck_list(self):
-        return self.__cards

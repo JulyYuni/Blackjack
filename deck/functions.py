@@ -18,7 +18,7 @@ class Functions:
         player_answer = input("\n{} \n{}\n\nAnswer: ".format(computer_answer, computer_choices))
         player_answer = player_answer.upper()
         while not player_answer in right_answer:
-            player_answer = input("\n{} \n{}\n\n Answer: \n\n".format(computer_answer, computer_choices))
+            player_answer = input("\n{} \n{}\n\n Answer: ".format(computer_answer, computer_choices))
             player_answer = player_answer.upper()
         return player_answer
 
@@ -44,7 +44,7 @@ class Functions:
     # Calculating the result of the turn, if player won or lost
     def turn_calculator(self, player, player_hand_value, dealer_hand_value):
 
-        if dealer_hand_value > 22:
+        if dealer_hand_value > 21:
             self.__player_money, self.__conclusion = player.win()
 
         elif player_hand_value < 22:
